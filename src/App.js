@@ -8,19 +8,25 @@ import { evaluate } from 'mathjs';
 
 function App() {
 
-  const [input, setInput] = useState('');
+  const [input, setInput] = useState('0');
 
   const isOperator = value => {
     return isNaN(value);
   };
 
   const addInput = value => {
+    if (input === '0' && (!isOperator(value) || value === '-')){
+      setInput(value);
+    } else if (isOperator(value) && isOperator(input[input.length - 1])) {
+      setInput(input.slice(0, -1) + value);
+    } else {
       setInput(input + value);
+    }
   };
 
   const calculate = () => {
     if (input && !isOperator(input[input.length - 1]))
-      setInput(evaluate(input));
+      setInput(evaluate(input).toString());
   };
   
 
@@ -61,7 +67,7 @@ function App() {
           <Button handleClick={addInput}>/</Button>
         </div>
         <div className='fila'>
-          <ClearButton handleClear={() => setInput('')}>
+          <ClearButton handleClear={() => setInput('0')}>
             Clear
           </ClearButton>
         </div>
