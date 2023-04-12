@@ -10,14 +10,19 @@ function App() {
 
   const [input, setInput] = useState('');
 
+  const isOperator = value => {
+    return isNaN(value);
+  };
+
   const addInput = value => {
-    setInput(input + value);
+      setInput(input + value);
   };
 
   const calculate = () => {
-    if (input)
+    if (input && !isOperator(input[input.length - 1]))
       setInput(evaluate(input));
   };
+  
 
   return (
     <div className="App">
