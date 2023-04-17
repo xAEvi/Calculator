@@ -17,7 +17,7 @@ function App() {
   const addInput = value => {
     if (input === '0' && (!isOperator(value) || value === '-')){
       setInput(value);
-    } else if (isOperator(value) && isOperator(input[input.length - 1])) {
+    } else if (isOperator(value) && isOperator(input[input.length - 1]) && value !== '-') {
       setInput(input.slice(0, -1) + value);
     } else {
       setInput(input + value);
@@ -26,7 +26,7 @@ function App() {
 
   const calculate = () => {
     if (input && !isOperator(input[input.length - 1]))
-      setInput(evaluate(input).toString());
+      setInput(evaluate(input).toFixed(4).toString());
   };
   
 
@@ -41,33 +41,33 @@ function App() {
       </div>
       
       <div className='calculator-container'>
-        <Screen input={input}/>
+        <Screen id="display" input={input}/>
         <div className='fila'>
-          <Button handleClick={addInput}>1</Button>
-          <Button handleClick={addInput}>2</Button>
-          <Button handleClick={addInput}>3</Button>
-          <Button handleClick={addInput}>+</Button>
+          <Button id="one" handleClick={addInput}>1</Button>
+          <Button id="two" handleClick={addInput}>2</Button>
+          <Button id="three" handleClick={addInput}>3</Button>
+          <Button id="add" handleClick={addInput}>+</Button>
         </div>
         <div className='fila'>
-          <Button handleClick={addInput}>4</Button>
-          <Button handleClick={addInput}>5</Button>
-          <Button handleClick={addInput}>6</Button>
-          <Button handleClick={addInput}>-</Button>
+          <Button id="four" handleClick={addInput}>4</Button>
+          <Button id="five" handleClick={addInput}>5</Button>
+          <Button id="six" handleClick={addInput}>6</Button>
+          <Button id="subtract" handleClick={addInput}>-</Button>
         </div>
         <div className='fila'>
-          <Button handleClick={addInput}>7</Button>
-          <Button handleClick={addInput}>8</Button>
-          <Button handleClick={addInput}>9</Button>
-          <Button handleClick={addInput}>*</Button>
+          <Button id="seven" handleClick={addInput}>7</Button>
+          <Button id="eight" handleClick={addInput}>8</Button>
+          <Button id="nine" handleClick={addInput}>9</Button>
+          <Button id="multiply" handleClick={addInput}>*</Button>
         </div>
         <div className='fila'>
-          <Button handleClick={calculate}>=</Button>
-          <Button handleClick={addInput}>0</Button>
-          <Button handleClick={addInput}>.</Button>
-          <Button handleClick={addInput}>/</Button>
+          <Button id="equals" handleClick={calculate}>=</Button>
+          <Button id="zero" handleClick={addInput}>0</Button>
+          <Button id="decimal" handleClick={addInput}>.</Button>
+          <Button id="divide" handleClick={addInput}>/</Button>
         </div>
         <div className='fila'>
-          <ClearButton handleClear={() => setInput('0')}>
+          <ClearButton id="clear" handleClear={() => setInput('0')}>
             Clear
           </ClearButton>
         </div>
