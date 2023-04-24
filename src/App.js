@@ -26,7 +26,7 @@ function App() {
 
   const calculate = () => {
     if (input && !isOperator(input[input.length - 1]))
-      setInput(evaluate(input).toFixed(4).toString());
+      setInput(evaluate(input).toString());
   };
   
 
